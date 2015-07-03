@@ -1,22 +1,26 @@
 
-Template.inform.events({
-    "click .profile-delete-icon": function(){Projects.remove(this._id);}
-})
 
-Template.add.events({
-    "submit #makeproject": function(event){
+
+Template.quiz1.events({'submit #projform':function(event){
         event.preventDefault();
-        var projname = event.target.projname.value;
-        var firstname = event.target.firstname.value;
-        var lastname = event.target.lastname.value;
-        var meteorURL = event.target.meteorURL.value;
-        var gitURL = event.target.gitURL.value;
-        Projects.insert({projname:projname, firstname:firstname, lastname:lastname, meteorURL:meteorURL, gitURL:gitURL});
-        Router.go('quiz1');
-        
+
+        Projects.insert({projname:projname.value,firstname:firstname.value,lastname:lastname.value,meteorURL:meteorURL.value,githubURL:githubURL.value
+        });
+
+        projname.value = '';
+        firstname.value = '';
+        lastname.value = '';
+        meteorURL.value = '';
+        githubURL.value = '';
+
+    },
+
+    'click .delete-proj':function(event){
+        Projects.remove(this._id);
     }
 });
 
-Template.show.helpers({
-    exec: function(){return Projects.find({},{sort: {projname: 1, firstname: 1, lastname: 1}});}
+Template.quiz1.helpers({exec:function(){return Projects.find({},{sort:{projname:1,firstname:1,lastname:1}}).fetch();}
+
 });
+

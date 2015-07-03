@@ -1,42 +1,71 @@
 
 
 <template name="quiz1">
-    <h2> Quiz 1 - Jason Theoharis </h2>
-    <div name="page" class="row">
-        {{> add}}
-        {{> show}}
-    </div>
-</template>
 
-<template name="inform">
-    <tr>
-        <td>{{projname}}</td><td>{{firstname}}</td><td>{{lastname}}</td><td><a href={{meteorurl}}>Meteor URL</a></td><td><a href={{giturl}}>GitHub URL</a></td>
-        <span class="glyphicon glyphicon-remove profile-delete-icon" aria-hidden="true"></span>
-    </tr>
-</template>
+<h1>Quiz 1 Page</h1>
 
-<template name="add">
-    <div class="col-md-5">
-        <h4>Add your name, project name, and URLs for your deployed meteor application and Github repository.</h4>
+<div class="row">
+
+    <div class="col-sm-5">
+        <h4>Submit Info Below:</h4>
         <br>
-    <form id="addInfo">
-            Project Name: <input type="text" name="projname"><br/> First name: <input type="text" name="firstname"><br/>Last name: <input type="text" name="lastname"><br/>Meteor URL: <input type="text" name="meteorURL"><br/>GitHub URL: <input type="text" name="gitURL"><br/>
-            <input type="submit">
-    </form>
+        <form id="projform">
+            <div class="form-group">
+                <label for="projname">Project name: </label>
+                <input type="text" id="projname">
+            </div>
+            <div class="form-group">
+                <label for="firstname">First name: </label>
+                <input type="text" id="firstname">
+            </div>   
+            <div class="form-group">
+                <label for="lastname">Last name: </label>
+                <input type="text" id="lastname">
+            </div>
+            <div class="form-group">
+                <label for="meteorURL">Meteor URL: </label>
+                <input type="text" id="meteorURL">
+            </div>
+            <div class="form-group">
+                <label for="githubURL">Github URL: </label>
+                <input type="text" id="githubURL">
+            </div>
+            <button id="makeproj" type="submit">Submit</button>
+        </form>
     </div>
+
+
+    <div class="col-sm-6">
+        <h4>All Projects: </h4>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr><th>Project name:</th><th>Name:</th><th>Meteor:</th><th>Github:</th></tr>
+                </thead>
+                <tbody>
+                    {{#each exec}}
+                    <tr>
+                        {{> show}}
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
 </template>
+
+
 
 <template name="show">
-    <div class="col-md-5">
-        <table class="table">
-            <thead><tr>
-                    <th>Project</th><th>First Name</th><th>Last Name</th><th>Meteor URL</th><th>GitHub URL</th>
-                </tr></thead>
-            <tbody>
-                {{#each exec}}
-                    {{> inform}}
-                {{/each}}  
-            </tbody>
-        </table>    
-    </div>
+    <td>{{projname}}</td>
+    <td>{{firstname}} {{lastname}}</td>
+    <td><a href="{{meteorURL}}">{{meteorURL}}</a></td>
+    <td><a href="{{githubURL}}">{{githubURL}}</a></td>
+    <td><button class="delete-proj">Del</button></td>
 </template>
+
+
+
